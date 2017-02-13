@@ -1,0 +1,39 @@
+<section>
+  <md-toolbar color="primary">
+    TodoList
+  </md-toolbar>
+
+  <div class="app-content">
+    <md-card>
+      <md-input placeholder="Que voulez-vous faire prochainement ?" class='full-width' [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()"></md-input>
+      <button md-button color="primary" type="button" name="button" (click)="addTodo()">Ajouter</button>
+    </md-card>
+
+    <md-card>
+      <md-card-header>
+        <md-card-title>Mes tâches</md-card-title>
+        <md-card-subtitle>Vous avez {{ todos.length }} tâche<span *ngIf='todos.length > 1'>s</span></md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <md-list>
+          <section *ngIf='todos.length > 0'>
+           <md-list-item class="md-2-line" *ngFor="let todo of todos">
+              <div class="md-list-item-text full-width">
+                <md-checkbox  class="w10" (ngModelChange)="toggleTodoComplete(todo)" [checked]="todo.complete" [(ngModel)]="todo.complete"></md-checkbox>
+                <md-input-container class="w80">
+                  <input md-input value="{{ todo.title }}" [class.checked]='todo.complete' (keyup.enter)="updateTodo(todo)" value="{{ todo.title }}" [(ngModel)]="todo.title">
+                </md-input-container>
+                <div class="w10 text-center">
+                  <button md-button color="warn" type="button" name="button" (click)="deleteTodo(todo)">
+                    <i class="material-icons">&#xE872;</i>
+                  </button>
+                </div>
+              </div>
+           </md-list-item>
+         </section>
+       </md-list>
+     </md-card-content>
+    </md-card>
+  </div>
+
+</section>
